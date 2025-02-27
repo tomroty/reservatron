@@ -4,14 +4,14 @@ require_once 'getReservedSlots.php';
 function getAvailableSlots() {
     $slots = [];
     $startHour = 8;
-    $endHour = 11;
+    $endHour = 18;
     
     $date = new DateTime();
     $date->setTime(0, 0, 0);
     
     $reservedSlots = getReservedSlots();
     
-    for ($d = 0; $d < 7; $d++) {
+    for ($d = 0; $d < 14; $d++) {
         for ($h = $startHour; $h <= $endHour; $h++) {
             $slotDate = clone $date;
             $slotDate->setTime($h, 0, 0);
