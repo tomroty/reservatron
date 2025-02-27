@@ -1,4 +1,10 @@
-<?php session_start(); ?>
+<?php 
+session_start(); 
+// Générer un token CSRF s'il n'existe pas déjà
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -12,8 +18,12 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="index.php">Réservatron</a>
-            <div class="collapse navbar-collapse">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
                     <?php if (isset($_SESSION["user_id"])): ?>
                         <li class="nav-item"><a class="nav-link" href="profile.php">Profil</a></li>
                         <li class="nav-item"><a class="nav-link" href="appointments.php">Mes Rendez-vous</a></li>

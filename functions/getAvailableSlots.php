@@ -3,8 +3,8 @@ require_once 'getReservedSlots.php';
 
 function getAvailableSlots() {
     $slots = [];
-    $startHour = 10;
-    $endHour = 17;
+    $startHour = 8;
+    $endHour = 11;
     
     $date = new DateTime();
     $date->setTime(0, 0, 0);
@@ -15,7 +15,7 @@ function getAvailableSlots() {
         for ($h = $startHour; $h <= $endHour; $h++) {
             $slotDate = clone $date;
             $slotDate->setTime($h, 0, 0);
-            $slotString = $slotDate->format('Y-m-d H:i:s');
+            $slotString = $slotDate->format('Y-m-d H:i');
         
             if ($slotDate > new DateTime() && !in_array($slotString, $reservedSlots)) {
                 $slots[] = $slotString;
