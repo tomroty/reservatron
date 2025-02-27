@@ -3,6 +3,9 @@
 <div class="container mt-5">
     <h2 class="text-center">Mes Rendez-vous</h2>
     <?php if (isset($_SESSION["user_id"])): ?>
+        <div class="text-center mb-4">
+            <a href="booking.php" class="btn btn-primary">Prendre un rendez-vous</a>
+        </div>
         <?php if (!empty($appointments)): ?>
             <ul class="list-group mt-4">
                 <?php foreach ($appointments as $appointment): ?>
