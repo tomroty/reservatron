@@ -18,9 +18,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST["email"]);
     $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
     $verification_token = bin2hex(random_bytes(16));
-    $active = 0; // Compte inactif jusqu'à vérification
+    $active = 0; 
 
-    // Validation
+
     if (!empty($first_name) && 
         !empty($last_name) && 
         !empty($birth_date) && 

@@ -3,12 +3,6 @@
 <div class="container mt-5">
     <h2 class="text-center">Contact</h2>
     
-    <?php if (isset($_GET['status']) && $_GET['status'] == 'success'): ?>
-        <div class="alert alert-success">
-            Votre message a été envoyé avec succès. Nous vous répondrons dès que possible.
-        </div>
-    <?php endif; ?>
-    
     <form action="functions/sendContactMessage.php" method="post" class="mt-4">
         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); ?>">
         
