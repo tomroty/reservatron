@@ -11,7 +11,7 @@ function getAvailableSlots() {
     
     $reservedSlots = getReservedSlots();
     
-    for ($d = 0; $d < 14; $d++) {
+    for ($d = 0; $d < 7; $d++) {
         for ($h = $startHour; $h <= $endHour; $h++) {
             $slotDate = clone $date;
             $slotDate->setTime($h, 0, 0);
