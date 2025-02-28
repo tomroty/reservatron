@@ -3,7 +3,7 @@
 <div class="container mt-5">
     <h2 class="text-center">Contact</h2>
     
-    <form action="functions/sendContactMessage.php" method="post" class="mt-4">
+    <form method="post" class="mt-4">
         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); ?>">
         
         <div class="mb-3">
