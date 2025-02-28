@@ -3,7 +3,6 @@ require 'db.php';
 require '../vendor/autoload.php';
 session_start();
 
-// Vérification CSRF
 if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
     header("Location: ../register.php?error=invalid_token");
     exit();

@@ -11,6 +11,10 @@
             <div class="alert alert-danger">
                 Veuillez remplir tous les champs correctement.
             </div>
+        <?php elseif ($_GET['error'] == 'invalid_token'): ?>
+            <div class="alert alert-danger">
+                Token CSRF invalide. Veuillez réessayer.
+            </div>
         <?php endif; ?>
     <?php endif; ?>
     <form action="functions/createUser.php" method="post" class="mt-4">
