@@ -1,7 +1,7 @@
 <?php
 $host = "localhost";
 $dbname = "reservation_db";
-$username = "tom";
+$username = "root";
 $password = "";
 
 try {
