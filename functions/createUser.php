@@ -1,6 +1,5 @@
 <?php
 require 'db.php';
-require '../vendor/autoload.php';
 session_start();
 
 if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
@@ -17,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST["email"]);
     $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
     $verification_token = bin2hex(random_bytes(16));
-    $active = 0; 
+    $active = 1;
 
 
     if (!empty($first_name) && 
@@ -37,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         $stmt = $pdo->prepare("INSERT INTO users (first_name, last_name, birth_date, address, phone, email, password, verification_token, active) 
-                               VALUES (:first_name, :last_name, :birth_date, :address, :phone, :email, :password, :verification_token, :active)");
+                              VALUES (:first_name, :last_name, :birth_date, :address, :phone, :email, :password, :verification_token, :active)");
         $result = $stmt->execute([
             'first_name' => $first_name,
             'last_name' => $last_name,
@@ -51,34 +50,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ]);
         
         if ($result) {
-            try {
-                $mail = new PHPMailer\PHPMailer\PHPMailer();
-                $mail->isSMTP();
-                $mail->Host = 'smtp.example.com'; 
-                $mail->SMTPAuth = true;
-                $mail->Username = 'your-email@example.com'; 
-                $mail->Password = 'your-password'; 
-                $mail->SMTPSecure = 'tls';
-                $mail->Port = 587;
-                
-                $mail->setFrom('no-reply@reservatron.com', 'Réservatron');
-                $mail->addAddress($email, $first_name . ' ' . $last_name);
-                $mail->isHTML(true);
-                $mail->Subject = 'Vérification de votre compte Réservatron';
-                $mail->Body = "Bonjour $first_name $last_name,<br><br>
-                            Merci pour votre inscription sur Réservatron. Veuillez cliquer sur le lien ci-dessous pour activer votre compte:<br><br>
-                            <a href='http://votre-site.com/verify.php?token=$verification_token&email=$email'>Activer mon compte</a><br><br>
-                            Cordialement,<br>
-                            L'équipe Réservatron";
-                
-                $mail->send();
-                
-                header("Location: ../login.php?register=pending&email=" . urlencode($email));
-                exit();
-            } catch (Exception $e) {
-                header("Location: ../login.php?register=success&email_error=true");
-                exit();
-            }
+            header("Location: ../login.php?register=success");
+            exit();
         }
     }
     
